@@ -237,6 +237,11 @@
 \newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
 
+% For elements of talks
+\newcommand*{\talktitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
+\newcommand*{\talkvenuestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
+\newcommand*{\talkdatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
+
 % For elements of the cover letter
 \newcommand*{\lettersectionstyleface}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries #1}}
 \newcommand*{\lettersectionstyle}[1]{%
@@ -813,6 +818,24 @@
 % Usage: \cvskill{<type>}{<skillset>}
 \newcommand*{\cvskill}[2]{%
   \skilltypestyle{#1} & \leavevmode\skillsetstyle{#2} \\
+}
+
+% Define an environment for cvtalks
+\newenvironment{cvtalks}{%
+  \vspace{\acvSectionContentTopSkip}
+  \vspace{-2mm}
+  \begin{center}
+    \setlength\tabcolsep{0pt}
+    \setlength{\extrarowheight}{0pt}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 2cm} R{2cm}}
+      }{%
+    \end{tabular*}
+  \end{center}
+}
+% Define a line of cv information for conference talks
+% Usage: \cvtalk{<title>}{<venue>}{<date>}
+\newcommand*{\cvtalk}[3]{%
+  \talktitlestyle{#1} --- \talkvenuestyle{#2} & \talkdatestyle{#3} \\
 }
 
 % Define an environment for cvitems(for cventry)
