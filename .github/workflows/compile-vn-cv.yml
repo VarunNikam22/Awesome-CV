@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - vn
+    paths:
+      - 'varun/**/*.tex'
+      - 'awesome-cv.cls'
+    paths-ignore:
+      - '.github/**'
 
 permissions:
   contents: write
