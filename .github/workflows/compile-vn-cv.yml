@@ -7,8 +7,6 @@ on:
     paths:
       - 'varun/**/*.tex'
       - 'awesome-cv.cls'
-    paths-ignore:
-      - '.github/**'
 
 permissions:
   contents: write
