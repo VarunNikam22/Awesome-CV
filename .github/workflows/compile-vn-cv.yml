@@ -27,7 +27,7 @@ jobs:
           ;
 
     - name: Build with latex-action
-      uses: xu-cheng/latex-action@v2
+      uses: xu-cheng/latex-action@v4
       with:
         root_file: varun/cv.tex
         work_in_root_file_dir: true
