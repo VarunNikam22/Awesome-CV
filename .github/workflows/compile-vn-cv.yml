@@ -1,11 +1,8 @@
-name: Compile PDFs
+name: Compile VN's CV
 
 on:
   push:
-    branches-ignore:
-      - vn
-  pull_request:
-    branches-ignore:
+    branches:
       - vn
 
 jobs:
@@ -16,6 +13,8 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
 
     - name: Install fonts
       run: |
@@ -30,5 +29,5 @@ jobs:
 
     - uses: actions/upload-artifact@v6
       with:
-        name: examples
-        path: examples/*.pdf
+        name: vn-cv
+        path: varun/cv.pdf
