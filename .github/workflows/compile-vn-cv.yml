@@ -39,6 +39,6 @@ jobs:
       with:
         author_name: github-actions[bot]
         author_email: 41898282+github-actions[bot]@users.noreply.github.com
-        message: "ci(vn): Update compiled pdf files"
+        message: "chore: Update compiled pdf files"
         add: varun/cv.pdf
         push: true
