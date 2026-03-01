@@ -11,7 +11,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: texlive/texlive:latest
 
     steps:
     - name: Checkout repo
@@ -21,14 +20,20 @@ jobs:
 
     - name: Install fonts
       run: |
-        apt update
-        apt install --yes \
+        sudo apt update
+        sudo apt install --yes \
           fonts-roboto \
           fonts-adobe-sourcesans3 \
           ;
 
-    - name: Compile
-      run: make
+    - name: Build with latex-action
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: varun/cv.tex
+        work_in_root_file_dir: true
+        latexmk_use_xelatex: true
+        args: -interaction=nonstopmode -file-line-error -output-directory=varun
+        post_compile: "latexmk -c"
 
     - name: Commit compiled PDF
       uses: EndBug/add-and-commit@v9
