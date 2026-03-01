@@ -5,6 +5,9 @@ on:
     branches:
       - vn
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,7 +30,11 @@ jobs:
     - name: Compile
       run: make
 
-    - uses: actions/upload-artifact@v6
+    - name: Commit compiled PDF
+      uses: EndBug/add-and-commit@v9
       with:
-        name: vn-cv
-        path: varun/cv.pdf
+        author_name: github-actions[bot]
+        author_email: 41898282+github-actions[bot]@users.noreply.github.com
+        message: "ci(vn): Update compiled pdf files"
+        add: varun/cv.pdf
+        push: true
