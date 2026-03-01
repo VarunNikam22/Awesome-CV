@@ -30,6 +30,10 @@ jobs:
     - name: Compile
       run: make
 
+    - name: Mark repo safe for git
+      run: |
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
     - name: Commit compiled PDF
       uses: EndBug/add-and-commit@v9
       with:
