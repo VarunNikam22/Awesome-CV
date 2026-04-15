@@ -904,9 +904,9 @@
 \RequirePackage[ % BibLaTeX
     sorting=ydnt, % Sorts entries by year (descending order), name, title
     style=verbose,
-    doi=false,
+    doi=true,
     isbn=true,
-    url=false,
+    url=true,
     eprint=false,
     backref = false, % include back references in bibliography
     maxcitenames=3, % affects only the citations in the document body
@@ -932,9 +932,20 @@
 \DeclareFieldFormat[report]{title}{#1\par}
 \DeclareFieldFormat[incollection]{title}{#1\par}
 
+% Hyperlink title using DOI when available; otherwise use URL.
+\newcommand*{\acv@printlinkedtitle}{%
+    \iffieldundef{doi}
+    {%
+        \iffieldundef{url}
+        {\textbf{\printfield{title}}}%
+        {\href{\thefield{url}}{\textbf{\printfield{title}}}}%
+    }
+    {\href{https://doi.org/\thefield{doi}}{\textbf{\printfield{title}}}}%
+}
+
 \DeclareBibliographyDriver{article}{%
     \fontsize{10pt}{1em}\bodyfont%
-    \textbf{\printfield{title}}%
+    \acv@printlinkedtitle%
     \newblock%
     \printnames{author}%
     \par%
@@ -959,7 +970,7 @@
 
 \DeclareBibliographyDriver{inproceedings}{%
     \fontsize{10pt}{1em}\bodyfont%
-    \textbf{\printfield{title}}%
+    \acv@printlinkedtitle%
     \newblock%
     \printnames{author}%
     \par%
@@ -978,7 +989,7 @@
 
 \DeclareBibliographyDriver{incollection}{%
     \fontsize{10pt}{1em}\bodyfont%
-    \textbf{\printfield{title}}%
+    \acv@printlinkedtitle%
     \newblock%
     \printnames{author}%
     \par%
@@ -997,7 +1008,7 @@
 
 \DeclareBibliographyDriver{misc}{%
     \fontsize{10pt}{1em}\bodyfont%
-    \textbf{\printfield{title}}%
+    \acv@printlinkedtitle%
     \newblock%
     \printnames{author}%
     \par%
@@ -1018,7 +1029,7 @@
 
 \DeclareBibliographyDriver{report}{%
     \fontsize{10pt}{1em}\bodyfont%
-    \textbf{\printfield{title}}%
+    \acv@printlinkedtitle%
     \newblock%
     \printnames{author}%
     \par%
