@@ -933,15 +933,19 @@
 \DeclareFieldFormat[incollection]{title}{#1\par}
 
 \DeclareBibliographyDriver{article}{%
-    \fontsize{9pt}{1em}\bodyfont%
-    \printfield{title}%
+    \fontsize{10pt}{1em}\bodyfont%
+    \textbf{\printfield{title}}%
     \newblock%
     \printnames{author}%
     \par%
     \newblock%
     {%
         \fontsize{8pt}{1em}\bodyfontlight\color{graytext}%
-        \usebibmacro{journal+issuetitle}%
+        \printfield{journaltitle}%
+        \setunit*{\addspace}%
+        \printfield{volume}%
+        \setunit{.}%
+        \printfield{number}%
         \setunit{\space}%
         \printfield{pages}%
         \newunit%
@@ -954,8 +958,8 @@
 }
 
 \DeclareBibliographyDriver{inproceedings}{%
-    \fontsize{9pt}{1em}\bodyfont%
-    \printfield{title}%
+    \fontsize{10pt}{1em}\bodyfont%
+    \textbf{\printfield{title}}%
     \newblock%
     \printnames{author}%
     \par%
@@ -973,8 +977,8 @@
 }
 
 \DeclareBibliographyDriver{incollection}{%
-    \fontsize{9pt}{1em}\bodyfont%
-    \printfield{title}%
+    \fontsize{10pt}{1em}\bodyfont%
+    \textbf{\printfield{title}}%
     \newblock%
     \printnames{author}%
     \par%
@@ -992,8 +996,8 @@
 }
 
 \DeclareBibliographyDriver{misc}{%
-    \fontsize{9pt}{1em}\bodyfont%
-    \printfield{title}%
+    \fontsize{10pt}{1em}\bodyfont%
+    \textbf{\printfield{title}}%
     \newblock%
     \printnames{author}%
     \par%
@@ -1013,8 +1017,8 @@
 }
 
 \DeclareBibliographyDriver{report}{%
-    \fontsize{9pt}{1em}\bodyfont%
-    \printfield{title}%
+    \fontsize{10pt}{1em}\bodyfont%
+    \textbf{\printfield{title}}%
     \newblock%
     \printnames{author}%
     \par%
@@ -1032,15 +1036,19 @@
 }
 
 % New syntax for flexible backend (BibLaTeX > v3.3)
+\newcommand*{\acv@formatauthorname}[2]{%
+    \ifthenelse{\equal{#1}{\@firstname} \and \equal{#2}{\@lastname}}%
+    {\mkbibbold{#1\space#2}}%
+    {#1\space#2}%
+}
+
 \DeclareNameFormat{author}{%
-    \fontsize{9pt}{1em}\bodyfont%
+    \fontsize{10pt}{1em}\bodyfont%
     \renewcommand*{\multinamedelim}{\addcomma\addspace}%
     \nameparts{#1}%
     \ifthenelse{\value{listcount}=1}
-    {\ifblank{\namepartgiven}{}{\namepartgiven\space}%
-    \namepartfamily}%
-    {\ifblank{\namepartgiven}{}{\namepartgiven\space}%
-    \namepartfamily}%
+    {\acv@formatauthorname{\namepartgiven}{\namepartfamily}}%
+    {\acv@formatauthorname{\namepartgiven}{\namepartfamily}}%
     \ifthenelse{\value{listcount}<\value{liststop}}
     {\addcomma\space}
     {}
