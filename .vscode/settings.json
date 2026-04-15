@@ -1,4 +1,9 @@
 {
     "latex-workshop.latex.recipe.default": "latexmk (xelatex)",
-    "terminal.integrated.cwd": "varun/"
+    "terminal.integrated.cwd": "varun/",
+    "latex-workshop.formatting.tex-fmt.args": [
+        "--nowrap",
+        "--tabsize",
+        "4"
+    ]
 }
