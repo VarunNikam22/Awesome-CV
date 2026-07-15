@@ -2,11 +2,11 @@ name: Compile PDFs
 
 on:
   push:
-    branches-ignore:
-      - vn
+    branches:
+      - main
   pull_request:
-    branches-ignore:
-      - vn
+    branches:
+      - main
 
 jobs:
   build:
