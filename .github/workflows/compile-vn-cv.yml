@@ -26,13 +26,6 @@ jobs:
       run: |
         apt update
         apt install -y fonts-roboto
-        # Install Adobe Source Sans 3 manually
-        apt install -y wget fontconfig
-        mkdir -p /usr/local/share/fonts/source-sans-3
-        wget -qO /tmp/source-sans.zip \
-          https://github.com/adobe-fonts/source-sans/releases/latest/download/OTF-source-sans-3.zip
-        unzip /tmp/source-sans.zip -d /usr/local/share/fonts/source-sans-3
-        fc-cache -fv
 
     - name: Compile
       run: make
